@@ -41,11 +41,11 @@ DBMS, 可以将DBMS分解为下面三部分：
 
 ---
 ## OLAP数据库的对比
-| |Druid | ElasticSearch | ClickHouse | Spark |
+| |ElasticSearch | Druid | ClickHouse | Spark |
 |--|--|--|--|--|
-|query| json | sql like\n(no join) | sql\n(extended) | hive |
-|schema| column\ninverted index | document\ninverted index | column\nindex | column |
-|Data storage format|  segment | Internal storage, compressed | standalone | Parquet |
+|query| sql like | json | sql(extended) | hive |
+|schema| document+inverted index |column+inverted index | column+index | column |
+|storage format| lucene index | segment | partition | Parquet |
 +++
 
 ![benchmark](https://www.percona.com/blog/wp-content/uploads/2017/02/spark_vs_clickhouse-1024x624.png)
@@ -75,9 +75,9 @@ DBMS, 可以将DBMS分解为下面三部分：
 **Distributed Data + Parallelizable Queries => Horizontal Scalability**
 - 分布式系统，针对小数据查询优化(hash join)
 
-- sharding
+- sharding |
 
-- zookeeper for replication(replication/deduplication)
+- zookeeper for replication(replication/deduplication) |
 
 ---
 ## 简洁, 开箱即用
@@ -90,7 +90,6 @@ DBMS, 可以将DBMS分解为下面三部分：
 
 ---
 
-+++
 # ClickHouse Adhoc
 
 - JSONLine importer(jq)
@@ -100,7 +99,7 @@ DBMS, 可以将DBMS分解为下面三部分：
 - 数据类型
   -  Array Join
 
----
++++
 难点:
 - 数据管理
 
@@ -113,12 +112,16 @@ DBMS, 可以将DBMS分解为下面三部分：
    - ops(prometheus, graphana)
    - data ingestion
 
-+++
-
 ---
 # 如何选择
 
-对于稳定的数据(normalized data)
+对于normalized data
 - sql;
 - web/app analytics;
 - client tool
+
++++
+对于unnormalized data
+- pandas
+- dask (then back to pandas)
+- how to join
