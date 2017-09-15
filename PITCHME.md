@@ -5,7 +5,7 @@
 +++
 
 ## ClickHouse. Just makes you think faster.
-<a href="http://clickhouse.yandex" target="_blank">Yandex</a>
+- <a href="http://clickhouse.yandex" target="_blank">Yandex</a>
 - CERN
 - Cloudflare
 
@@ -32,45 +32,50 @@ MySQL，Postgres,SQL Server等都是典型的行式数据库。
 +++
 典型的列式数据库有： **Vertica**, Paraccel (Actian Matrix) (Amazon Redshift), Sybase IQ, Exasol, Infobright, InfiniDB, MonetDB, LucidDB, SAP HANA, Google Dremel, Google PowerDrill, **Druid**, kdb+ 等。
 
-+++
-
 ---
 ## 数据库的3个层面
 DBMS, 可以将DBMS分解为下面三部分：
-- 一种数据库查询语言SQL
-- 一系列数据库范式 |
+- 数据库查询语言SQL
+- 数据库范式 |
 - 存储引擎 |
 
 ---
 ## OLAP数据库的对比
 | |Druid | ElasticSearch | ClickHouse | Spark |
 |--|--|--|--|--|
-|query| json | sql like(no join) | sql(extend, no..) | Parquet |
-|schema| column+inverted index | document+inverted index | column+index | column |
+|query| json | sql like\n(no join) | sql\n(extended) | hive |
+|schema| column\ninverted index | document\ninverted index | column\nindex | column |
 |Data storage format|  segment | Internal storage, compressed | standalone | Parquet |
++++
+
 ![benchmark](https://www.percona.com/blog/wp-content/uploads/2017/02/spark_vs_clickhouse-1024x624.png)
 
 ---
 
 ## 高效率
 **Real-Time Analytics: Immutable Past, Append-Only Future**
-不同的存储方式会适应不同的场景。数据获取的场景是指请求如何发出，频率如何，比例如何。每种请求有多少数据被读出，包括按行，按列，按字节数；读取和更新数据之间的关系如何，活跃的数据有多大以及本地性如何；是否使用了事务，以及是否独立；对于数据持久性的要求如何，每种请求的延迟和吞吐量的要求如何等等。
+
+- 数据获取的场景是指请求如何发出，频率如何，比例如何。
+- 每种请求有多少数据被读出，包括按行，按列，按字节数；
+- 读取和更新数据之间的关系如何，活跃的数据有多大以及本地性如何；
+- 是否使用了事务，以及是否独立；
+- 对于数据持久性的要求如何，每种请求的延迟和吞吐量的要求如何等等。
 
 ---
 ## 高性能
 **Partial Aggregates + In-Memory + Indexes => Fast Queries**
 - MPP 数据库
 
-- Erlang运行时在CPU中的所有核心都在开动。当像Parallel这种技术变得更容易获取且成本更低廉时，你很难忽视Erlang VM所能提供的强大能力。未来Erlang VM将会被用来搭建能永久运行、能自我修复和扩展的系统。 |
+- 基于主键的索引以及基于hash的sharding |
 
-- 效率很难测量，能高效开发桌面应用的编程语言却可能在数学运算领域捉襟见肘，它与你期望从事的领域、生态圈中的可用工具，以及是否能方便地创造和扩展这些工具有关。 |
+- partition,压缩,传输优化 |
 
 ---
 ## 可扩展
 **Distributed Data + Parallelizable Queries => Horizontal Scalability**
 - 分布式系统，针对小数据查询优化(hash join)
 
-- 配置sharding
+- sharding
 
 - zookeeper for replication(replication/deduplication)
 
@@ -78,7 +83,9 @@ DBMS, 可以将DBMS分解为下面三部分：
 ## 简洁, 开箱即用
 
 - No Deps
+
 - 安装扩容简单
+
 - 已有工具
 
 ---
