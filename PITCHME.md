@@ -50,18 +50,18 @@ DBMS, 可以将DBMS分解为下面三部分：
 
 ![benchmark](https://www.percona.com/blog/wp-content/uploads/2017/02/spark_vs_clickhouse-1024x624.png)
 
----
++++
 
 ## 高效率
 **Real-Time Analytics: Immutable Past, Append-Only Future**
 
 - 数据获取的场景是指请求如何发出，频率如何，比例如何。
-- 每种请求有多少数据被读出，包括按行，按列，按字节数；
-- 读取和更新数据之间的关系如何，活跃的数据有多大以及本地性如何；
-- 是否使用了事务，以及是否独立；
-- 对于数据持久性的要求如何，每种请求的延迟和吞吐量的要求如何等等。
+- 每种请求有多少数据被读出，包括按行，按列，按字节数； |
+- 读取和更新数据之间的关系如何，活跃的数据有多大以及本地性如何； |
+- 是否使用了事务，以及是否独立； |
+- 对于数据持久性的要求如何，每种请求的延迟和吞吐量的要求如何。 |
 
----
++++
 ## 高性能
 **Partial Aggregates + In-Memory + Indexes => Fast Queries**
 - MPP 数据库
@@ -70,7 +70,7 @@ DBMS, 可以将DBMS分解为下面三部分：
 
 - partition,压缩,传输优化 |
 
----
++++
 ## 可扩展
 **Distributed Data + Parallelizable Queries => Horizontal Scalability**
 - 分布式系统，针对小数据查询优化(hash join)
@@ -79,7 +79,7 @@ DBMS, 可以将DBMS分解为下面三部分：
 
 - zookeeper for replication(replication/deduplication) |
 
----
++++
 ## 简洁, 开箱即用
 
 - No Deps
@@ -87,6 +87,23 @@ DBMS, 可以将DBMS分解为下面三部分：
 - 安装扩容简单
 
 - 已有工具
+
++++
+## 特色功能
+1. 真正面向列的数据库管理系统
+2. 数据压缩
+3. 磁盘存储数据
+4. 多核上的并行处理
+5. 多机的分布式处理
+6. SQL支持
+7. 向量引擎
+8. 实时数据更新
+9. 索引
+10. 适应在线请求
+11. 非精确计算的支持
+12. 支持嵌套的数据结构，支持数组作为数据类型
+13. 支持查询复杂度限制，包括限额
+14. 数据多副本和数据完整性支持
 
 ---
 
@@ -97,11 +114,13 @@ DBMS, 可以将DBMS分解为下面三部分：
 - 自动分区
 
 - 数据类型
-  -  Array Join
+  -  Array Join(arrayEnumerate, arrayEnumerateUniq)
 
 +++
 难点:
-- 数据管理
+- Strong Typing
+- 聚合数据的限制
+- 数据管理(update/delete)
 
 ---
 # ClickHouse Ecosys
