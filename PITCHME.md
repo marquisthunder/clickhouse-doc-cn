@@ -6,6 +6,7 @@
 
 ## ClickHouse. Just makes you think faster.
 - <a href="http://clickhouse.yandex" target="_blank">Yandex</a>
+- Percona
 - CERN
 - Cloudflare
 
